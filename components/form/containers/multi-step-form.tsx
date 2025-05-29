@@ -1,15 +1,14 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { FieldErrors, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { FormData as FormDataType, formSchema } from "@/lib/form-schema"
-import { useMultiStepForm } from "@/components/form/hooks/use-multi-step-form"
+import { useStepForm } from "@/components/form/hooks/use-multi-step-form"
 import { steps, defaultFormValues } from "@/lib/constants"
 import { useState } from "react"
 import ProgressCard from "../components/progress-card"
 import MultiStepFormFields from "../components/multi-step-form-fields"
 import SubmittedDataDialog from "../components/submitted-data-dialog"
-import { toast } from "sonner"
 
 export function MultiStepForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -34,10 +33,11 @@ export function MultiStepForm() {
     isStepCompleted,
     isLastVisitedStep,
     getStepFields,
-    validatePasswords,
+    validatePasswordsMatch,
     maxReachedStep,
-    resetForm
-  } = useMultiStepForm(steps)
+    resetForm,
+    handleSubmitError
+  } = useStepForm(steps)
 
   const CurrentStepComponent = currentStep.component
 
@@ -58,33 +58,18 @@ export function MultiStepForm() {
     }
   }
 
-  const handleSubmitError = (formErrors: FieldErrors<FormDataType>) => {
-    const errorMessages = Object.values(formErrors)
-      .map(error => error?.message)
-      .filter(message => message)
-    
-    if (errorMessages.length > 0) {
-      const errorText = errorMessages.length === 1 
-        ? errorMessages[0] 
-        : errorMessages.join(', ')
-      
-      toast.error(errorText)
-    } else {
-      toast.error("Lütfen tüm alanları doldurunuz")
-    }
-  }
-
   const handleNewForm = () => {
     setIsDialogOpen(false)
     resetForm(form)
   }
 
   const validateCurrentStep = async () => {
-    const stepFields = getStepFields(currentStepIndex)
+    const stepFields = getStepFields(currentStepIndex) as (keyof FormDataType)[]
     const isValid = await form.trigger(stepFields)
+    console.log(stepFields, isValid)
     
     if (currentStepIndex === 3 && isValid) {
-      return await validatePasswords(form)
+      return await validatePasswordsMatch(form)
     }
     return isValid
   }

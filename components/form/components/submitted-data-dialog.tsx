@@ -13,19 +13,21 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { countries, cities, hobbies, socialPlatforms } from "@/lib/constants";
 
+interface ISubmittedDataDialogProps {
+    isOpen: boolean,
+    onClose: () => void,
+    submittedData: FormDataType,
+    handleNewForm: () => void,
+    setShowSuccessDialog: (value: boolean) => void
+}
+
 function SubmittedDataDialog({
     isOpen,
     onClose,
     submittedData,
     handleNewForm,
     setShowSuccessDialog,
-}: {
-    isOpen: boolean;
-    onClose: () => void;
-    submittedData: FormDataType;
-    handleNewForm: () => void;
-    setShowSuccessDialog: (value: boolean) => void;
-}) {
+}: ISubmittedDataDialogProps) {
   const findLabel = (type: string, value: string, parent?: string) => {
     const sources: any = {
         country: countries,

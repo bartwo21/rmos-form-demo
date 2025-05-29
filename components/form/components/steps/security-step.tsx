@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Shield, Eye, EyeOff, Check, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useMultiStepForm } from "@/components/form/hooks/use-multi-step-form"
+import { useStepForm } from "@/components/form/hooks/use-multi-step-form"
 import { steps } from "@/lib/constants"
 import { getPasswordChecks } from "../../helpers/password-validate"
 
@@ -21,7 +21,7 @@ export function SecurityStep({ form }: SecurityStepProps) {
     setShowPassword,
     showConfirmPassword,
     setShowConfirmPassword,
-  } = useMultiStepForm(steps)
+  } = useStepForm(steps)
   
   const password = form.watch("password") || ""
   const confirmPassword = form.watch("confirmPassword") || ""

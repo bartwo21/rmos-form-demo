@@ -11,7 +11,7 @@ import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
 import { tr } from "date-fns/locale"
 import { cn } from "@/lib/utils"
-import { useMultiStepForm } from "@/components/form/hooks/use-multi-step-form"
+import { useStepForm } from "@/components/form/hooks/use-multi-step-form"
 import { steps } from "@/lib/constants"
 
 interface PersonalInfoStepProps {
@@ -19,7 +19,7 @@ interface PersonalInfoStepProps {
 }
 
 export function PersonalInfoStep({ form }: PersonalInfoStepProps) {
-  const { getStepHeader } = useMultiStepForm(steps)
+  const { getStepHeader } = useStepForm(steps)
   const stepHeader = getStepHeader(0)
   const HeaderIcon = stepHeader.icon
 

@@ -3,7 +3,7 @@
 import { CheckCircle } from "lucide-react"
 import { Step } from "@/components/form/hooks/use-multi-step-form"
 
-interface StepButtonProps {
+interface IStepButtonProps {
   step: Step
   index: number
   currentStepIndex: number
@@ -21,7 +21,7 @@ export function StepButton({
   isLastVisitedStep,
   maxReachedStep,
   onStepClick
-}: StepButtonProps) {
+}: IStepButtonProps) {
   const getStepStyles = () => {
     if (index === currentStepIndex) {
       return "bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400 border-blue-500"

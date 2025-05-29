@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { FormData } from "@/lib/form-schema"
 import { cities, stepHeaders } from "@/lib/constants"
-import { UseFormReturn } from "react-hook-form"
+import { FieldErrors, UseFormReturn } from "react-hook-form"
+import { toast } from "sonner"
 
 export interface Step {
   id: string
@@ -10,7 +11,7 @@ export interface Step {
   component: React.ComponentType<any>
 }
 
-export interface StepHeader {
+interface StepHeader {
   icon: React.ComponentType<any>
   iconBg: string
   iconColor: string
@@ -18,7 +19,7 @@ export interface StepHeader {
   description: string
 }
 
-export function useMultiStepForm(steps: Step[]) {
+export function useStepForm(steps: Step[]) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0)
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set())
   const [maxReachedStep, setMaxReachedStep] = useState(0)
@@ -78,12 +79,12 @@ export function useMultiStepForm(steps: Step[]) {
 
   const getStepFields = (stepIndex: number) => {
     switch (stepIndex) {
-      case 0: return ["firstName", "lastName", "email", "phone", "birthDate"] as const
-      case 1: return ["country", "city", "address", "postalCode"] as const
-      case 2: return ["gender", "hobbies"] as const
-      case 3: return ["password", "confirmPassword"] as const
-      case 4: return ["biography"] as const
-      case 5: return ["kvkkConsent"] as const
+      case 0: return ["firstName", "lastName", "email", "phone", "birthDate"]
+      case 1: return ["country", "city", "address", "postalCode"]
+      case 2: return ["gender", "hobbies"]
+      case 3: return ["password", "confirmPassword"]
+      case 4: return ["biography"]
+      case 5: return ["kvkkConsent"]
       default: return []
     }
   }
@@ -108,7 +109,7 @@ export function useMultiStepForm(steps: Step[]) {
       : []
   }
   
-  const validatePasswords = async (form: UseFormReturn<FormData>) => {
+  const validatePasswordsMatch = async (form: UseFormReturn<FormData>) => {
     const password = form.getValues("password")
     const confirmPassword = form.getValues("confirmPassword")
     
@@ -121,6 +122,20 @@ export function useMultiStepForm(steps: Step[]) {
     }
     
     return true
+  }
+
+  const handleSubmitError = (formErrors: FieldErrors<FormData>) => {
+    const errorMessages = Object.values(formErrors)
+      .map(error => error?.message)
+      .filter(message => message)
+    
+    if (errorMessages.length > 0) {
+      const errorText = errorMessages.length === 1 
+        ? errorMessages[0] 
+        : errorMessages.join(', ')
+      
+      toast.error(errorText)
+    }
   }
 
   const progress = ((currentStepIndex + 1) / steps.length) * 100
@@ -150,7 +165,8 @@ export function useMultiStepForm(steps: Step[]) {
     setUploadedFile,
     handleFileUpload,
     getAvailableCities,
-    validatePasswords,
-    resetForm
+    validatePasswordsMatch,
+    resetForm,
+    handleSubmitError
   }
 }

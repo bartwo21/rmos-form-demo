@@ -9,15 +9,15 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent } from "@/components/ui/card"
 import { FileText, Upload, Plus, Trash2, Camera } from "lucide-react"
-import { useMultiStepForm } from "@/components/form/hooks/use-multi-step-form"
+import { useStepForm } from "@/components/form/hooks/use-multi-step-form"
 import { steps, socialPlatforms } from "@/lib/constants"
 
-interface FilesInfoStepProps {
+interface IFilesInfoStepProps {
   form: UseFormReturn<FormData>
 }
 
-export function FilesInfoStep({ form }: FilesInfoStepProps) {
-  const { uploadedFile, handleFileUpload } = useMultiStepForm(steps)
+export function FilesInfoStep({ form }: IFilesInfoStepProps) {
+  const { uploadedFile, handleFileUpload } = useStepForm(steps)
   
   const { fields, append, remove } = useFieldArray({
     control: form.control,

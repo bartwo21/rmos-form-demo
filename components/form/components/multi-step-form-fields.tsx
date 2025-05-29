@@ -8,6 +8,18 @@ import React from 'react'
 import { FieldErrors, UseFormReturn } from 'react-hook-form'
 import { FormData as FormDataType } from '@/lib/form-schema'
 
+interface IMultiStepFormFieldsProps {
+  form: UseFormReturn<FormDataType>,
+  onSubmit: (data: FormDataType) => void,
+  CurrentStepComponent: React.ComponentType<{ form: UseFormReturn<FormDataType> }>,
+  goToPrevious: () => void,
+  isFirstStep: boolean,
+  isLastStep: boolean,
+  isSubmitting: boolean,
+  handleNext: () => void,
+  handleSubmitError: (formErrors: FieldErrors<FormDataType>) => void
+}
+
 function MultiStepFormFields({
     form,
     onSubmit,
@@ -18,17 +30,7 @@ function MultiStepFormFields({
     isSubmitting,
     handleNext,
     handleSubmitError
-}: {
-    form: UseFormReturn<FormDataType>,
-    onSubmit: (data: FormDataType) => void,
-    CurrentStepComponent: React.ComponentType<{ form: UseFormReturn<FormDataType> }>,
-    goToPrevious: () => void,
-    isFirstStep: boolean,
-    isLastStep: boolean,
-    isSubmitting: boolean,
-    handleNext: () => void,
-    handleSubmitError: (formErrors: FieldErrors<FormDataType>) => void
-}) {
+}: IMultiStepFormFieldsProps) {
   return (
     <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

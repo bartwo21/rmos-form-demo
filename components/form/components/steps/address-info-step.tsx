@@ -8,15 +8,15 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { MapPin } from "lucide-react"
-import { useMultiStepForm } from "@/components/form/hooks/use-multi-step-form"
+import { useStepForm } from "@/components/form/hooks/use-multi-step-form"
 import { steps } from "@/lib/constants"
 
-interface AddressInfoStepProps {
+interface IAddressInfoStepProps {
   form: UseFormReturn<FormData>
 }
 
-export function AddressInfoStep({ form }: AddressInfoStepProps) {
-  const { getAvailableCities } = useMultiStepForm(steps)
+export function AddressInfoStep({ form }: IAddressInfoStepProps) {
+  const { getAvailableCities } = useStepForm(steps)
   const selectedCountry = form.watch("country")
   const availableCities = getAvailableCities(selectedCountry)
 
@@ -32,7 +32,7 @@ export function AddressInfoStep({ form }: AddressInfoStepProps) {
         </div>
       </div>
 
-      <div className="flex w-full items-center justify-start gap-5">
+      <div className="flex w-full items-start justify-start gap-5">
         <FormField
           control={form.control}
           name="country"

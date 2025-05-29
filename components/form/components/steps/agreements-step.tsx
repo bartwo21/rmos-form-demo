@@ -5,15 +5,14 @@ import { FormData } from "@/lib/form-schema"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle, AlertTriangle, FileCheck } from "lucide-react"
 
-interface AgreementsStepProps {
+interface IAgreementsStepProps {
   form: UseFormReturn<FormData>
 }
 
-export function AgreementsStep({ form }: AgreementsStepProps) {
+export function AgreementsStep({ form }: IAgreementsStepProps) {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3 mb-6">

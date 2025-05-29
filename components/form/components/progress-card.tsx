@@ -5,6 +5,15 @@ import { CardHeader } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { steps } from '@/lib/constants'
 
+interface IProgressCardProps {
+    currentStepIndex: number,
+    progress: number,
+    isStepCompleted: (index: number) => boolean,
+    isLastVisitedStep: (index: number) => boolean,
+    maxReachedStep: number,
+    goToStep: (index: number) => void
+}
+
 function ProgressCard({
     currentStepIndex,
     progress,
@@ -12,14 +21,7 @@ function ProgressCard({
     isLastVisitedStep,
     maxReachedStep,
     goToStep
-}: {
-    currentStepIndex: number,
-    progress: number,
-    isStepCompleted: (index: number) => boolean,
-    isLastVisitedStep: (index: number) => boolean,
-    maxReachedStep: number,
-    goToStep: (index: number) => void
-}) {
+}: IProgressCardProps) {
   return (
     <Card className="bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700">
         <CardHeader>
