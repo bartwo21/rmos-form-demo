@@ -1,4 +1,4 @@
-import { MultiStepForm } from "@/containers"
+import { MultiStepForm } from "@/components/form/containers/multi-step-form";
 
 export default function Home() {
   return (

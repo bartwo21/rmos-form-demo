@@ -14,9 +14,6 @@ interface AgreementsStepProps {
 }
 
 export function AgreementsStep({ form }: AgreementsStepProps) {
-  const kvkkConsent = form.watch("kvkkConsent")
-  const marketingConsent = form.watch("marketingConsent")
-
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3 mb-6">

@@ -1,0 +1,7 @@
+export { MultiStepForm } from "./containers/multi-step-form"
+export { PersonalInfoStep } from "./components/steps/personal-info-step"
+export { AddressInfoStep } from "./components/steps/address-info-step"
+export { PreferencesStep } from "./components/steps/preferences-step"
+export { SecurityStep } from "./components/steps/security-step"
+export { FilesInfoStep } from "./components/steps/files-info-step"
+export { AgreementsStep } from "./components/steps/agreements-step" 

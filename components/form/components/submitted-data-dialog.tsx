@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { FormData } from "@/lib/form-schema";
+import { FormData as FormDataType } from "@/lib/form-schema";
 import { CheckCircle } from "lucide-react";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { countries, cities, hobbies, socialPlatforms } from "@/lib/constants";
 
-function submittedDataDialog({
+function SubmittedDataDialog({
     isOpen,
     onClose,
     submittedData,
@@ -22,7 +22,7 @@ function submittedDataDialog({
 }: {
     isOpen: boolean;
     onClose: () => void;
-    submittedData: FormData;
+    submittedData: FormDataType;
     handleNewForm: () => void;
     setShowSuccessDialog: (value: boolean) => void;
 }) {
@@ -142,4 +142,4 @@ function submittedDataDialog({
   )
 }
 
-export default submittedDataDialog
+export default SubmittedDataDialog

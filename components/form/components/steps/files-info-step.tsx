@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent } from "@/components/ui/card"
 import { FileText, Upload, Plus, Trash2, Camera } from "lucide-react"
-import { useMultiStepForm } from "@/hooks/use-multi-step-form"
+import { useMultiStepForm } from "@/components/form/hooks/use-multi-step-form"
 import { steps, socialPlatforms } from "@/lib/constants"
 
 interface FilesInfoStepProps {
@@ -35,12 +35,12 @@ export function FilesInfoStep({ form }: FilesInfoStepProps) {
           <p className="text-sm text-gray-600 dark:text-gray-400">Profil fotoğrafı ve ek bilgilerinizi ekleyin</p>
         </div>
       </div>
-
+      <div className="flex items-start gap-3">
       <FormField
         control={form.control}
         name="profilePhoto"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className="w-1/2">
             <FormLabel className="text-base font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
               <Camera className="h-4 w-4" />
               Profil Fotoğrafı
@@ -87,7 +87,7 @@ export function FilesInfoStep({ form }: FilesInfoStepProps) {
         control={form.control}
         name="biography"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className="w-1/2">
             <FormLabel className="text-base font-medium text-gray-700 dark:text-gray-300">
               Biyografi
             </FormLabel>
@@ -105,6 +105,7 @@ export function FilesInfoStep({ form }: FilesInfoStepProps) {
           </FormItem>
         )}
       />
+      </div>
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">

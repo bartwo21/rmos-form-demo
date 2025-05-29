@@ -1,7 +1,7 @@
 "use client"
 
 import { CheckCircle } from "lucide-react"
-import { Step } from "@/hooks/use-multi-step-form"
+import { Step } from "@/components/form/hooks/use-multi-step-form"
 
 interface StepButtonProps {
   step: Step

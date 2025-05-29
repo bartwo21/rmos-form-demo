@@ -1,14 +1,15 @@
 "use client"
 
 import { UseFormReturn } from "react-hook-form"
-import { FormData, getPasswordChecks } from "@/lib/form-schema"
+import { FormData } from "@/lib/form-schema"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Shield, Eye, EyeOff, Check, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useMultiStepForm } from "@/hooks/use-multi-step-form"
+import { useMultiStepForm } from "@/components/form/hooks/use-multi-step-form"
 import { steps } from "@/lib/constants"
+import { getPasswordChecks } from "../../helpers/password-validate"
 
 interface SecurityStepProps {
   form: UseFormReturn<FormData>

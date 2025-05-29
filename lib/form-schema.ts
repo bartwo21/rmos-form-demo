@@ -1,16 +1,7 @@
 import { z } from "zod"
-import { passwordRules, phoneRegex } from "./constants";
+import { phoneRegex } from "./constants";
+import { validatePassword } from "@/components/form/helpers/password-validate";
 
-export const validatePassword = (password: string) => {
-  return passwordRules.every(rule => rule.test(password));
-};
-
-export const getPasswordChecks = (password: string) => {
-  return passwordRules.map(rule => ({
-    label: rule.label,
-    valid: rule.test(password)
-  }));
-};
 
 export const formSchema = z.object({
   firstName: z.string().min(1, { message: "Adınızı giriniz" }),

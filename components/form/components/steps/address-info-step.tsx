@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { MapPin } from "lucide-react"
-import { useMultiStepForm } from "@/hooks/use-multi-step-form"
+import { useMultiStepForm } from "@/components/form/hooks/use-multi-step-form"
 import { steps } from "@/lib/constants"
 
 interface AddressInfoStepProps {

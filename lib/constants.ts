@@ -1,4 +1,4 @@
-import { AddressInfoStep, PersonalInfoStep, PreferencesStep, SecurityStep, FilesInfoStep, AgreementsStep } from "@/containers";
+import { AddressInfoStep, PersonalInfoStep, PreferencesStep, SecurityStep, FilesInfoStep, AgreementsStep } from "@/components/form";
 import { User, MapPin, Heart, Shield, FileText, FileCheck } from "lucide-react"
 export const stepHeaders = [
   {

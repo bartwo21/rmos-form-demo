@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { getPasswordChecks, FormData } from "@/lib/form-schema"
+import { FormData } from "@/lib/form-schema"
 import { cities, stepHeaders } from "@/lib/constants"
 import { UseFormReturn } from "react-hook-form"
 
@@ -146,7 +146,6 @@ export function useMultiStepForm(steps: Step[]) {
     setShowPassword,
     showConfirmPassword,
     setShowConfirmPassword,
-    getPasswordChecks,
     uploadedFile,
     setUploadedFile,
     handleFileUpload,

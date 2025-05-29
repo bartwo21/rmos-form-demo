@@ -11,7 +11,7 @@ import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
 import { tr } from "date-fns/locale"
 import { cn } from "@/lib/utils"
-import { useMultiStepForm } from "@/hooks/use-multi-step-form"
+import { useMultiStepForm } from "@/components/form/hooks/use-multi-step-form"
 import { steps } from "@/lib/constants"
 
 interface PersonalInfoStepProps {
