@@ -1,7 +1,8 @@
 "use client"
 
 import { UseFormReturn } from "react-hook-form"
-import { FormData, countries } from "@/lib/form-schema"
+import { FormData } from "@/lib/form-schema"
+import { countries } from "@/lib/constants"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -94,6 +95,25 @@ export function AddressInfoStep({ form }: AddressInfoStepProps) {
             </FormItem>
           )}
         />
+      <FormField
+        control={form.control}
+        name="postalCode"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Posta Kodu
+            </FormLabel>
+            <FormControl>
+              <Input 
+                placeholder="34000" 
+                {...field} 
+                className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-green-500 focus:ring-green-500 max-w-xs"
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
       </div>
 
       <FormField
@@ -102,7 +122,7 @@ export function AddressInfoStep({ form }: AddressInfoStepProps) {
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Adres *
+              Adres
             </FormLabel>
             <FormControl>
               <Textarea 
@@ -116,25 +136,6 @@ export function AddressInfoStep({ form }: AddressInfoStepProps) {
         )}
       />
 
-      <FormField
-        control={form.control}
-        name="postalCode"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Posta Kodu *
-            </FormLabel>
-            <FormControl>
-              <Input 
-                placeholder="34000" 
-                {...field} 
-                className="h-11 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-green-500 focus:ring-green-500 max-w-xs"
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
     </div>
   )
 } 

@@ -1,7 +1,7 @@
 "use client"
 
 import { UseFormReturn } from "react-hook-form"
-import { FormData } from "@/lib/form-schema"
+import { FormData, getPasswordChecks } from "@/lib/form-schema"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -20,7 +20,6 @@ export function SecurityStep({ form }: SecurityStepProps) {
     setShowPassword,
     showConfirmPassword,
     setShowConfirmPassword,
-    getPasswordChecks,
   } = useMultiStepForm(steps)
   
   const password = form.watch("password") || ""
@@ -41,69 +40,73 @@ export function SecurityStep({ form }: SecurityStepProps) {
         </div>
       </div>
 
-      <FormField
-        control={form.control}
-        name="password"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Şifre *
-            </FormLabel>
-            <FormControl>
-              <div className="relative">
-                <Input 
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Güvenli bir şifre oluşturun" 
-                  {...field} 
-                  className="h-11 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-red-500 focus:ring-red-500 pr-10"
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4 text-gray-400" />
-                  ) : (
-                    <Eye className="h-4 w-4 text-gray-400" />
-                  )}
-                </Button>
-              </div>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      
+      <div className="flex items-start gap-3">
+        <div className="w-1/2">
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Şifre *
+              </FormLabel>
+              <FormControl>
+                <div className="relative">
+                  <Input 
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Güvenli bir şifre oluşturun" 
+                    {...field} 
+                    className="h-11 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-red-500 focus:ring-red-500 pr-10"
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4 text-gray-400" />
+                    ) : (
+                      <Eye className="h-4 w-4 text-gray-400" />
+                    )}
+                  </Button>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      {password && (
-        <div className="space-y-2">
-          <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Şifre Güvenlik Kontrolü:</p>
-          <div className="space-y-1">
-            {checks.map((check, index) => (
-              <div key={index} className="flex items-center gap-2 text-sm">
-                {check.valid ? (
-                  <Check className="h-4 w-4 text-green-500" />
-                ) : (
-                  <X className="h-4 w-4 text-red-500" />
-                )}
-                <span className={cn(
-                  check.valid ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
-                )}>
-                  {check.label}
-                </span>
-              </div>
-            ))}
+        {password && (
+          <div className="space-y-2 mt-2">
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Şifre Güvenlik Kontrolü:</p>
+            <div className="space-y-1">
+              {checks.map((check, index) => (
+                <div key={index} className="flex items-center gap-2 text-sm">
+                  {check.valid ? (
+                    <Check className="h-4 w-4 text-green-500" />
+                  ) : (
+                    <X className="h-4 w-4 text-red-500" />
+                  )}
+                  <span className={cn(
+                    check.valid ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
+                  )}>
+                    {check.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
+        )}
         </div>
-      )}
 
       <FormField
         control={form.control}
         name="confirmPassword"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className="w-1/2">
             <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Şifre Tekrar *
             </FormLabel>
@@ -144,6 +147,7 @@ export function SecurityStep({ form }: SecurityStepProps) {
           </FormItem>
         )}
       />
+      </div>
     </div>
   )
 } 

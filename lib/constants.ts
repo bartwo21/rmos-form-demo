@@ -101,3 +101,99 @@ export const steps = [
     component: AgreementsStep,
   },
 ]
+
+
+export const phoneRegex = new RegExp(
+  /([(]?)([5])([0-9]{2})([)]?)([\s]?)([0-9]{3})([\s]?)([0-9]{2})([\s]?)([0-9]{2})$/
+);
+
+export const countries = [
+  { value: "tr", label: "Türkiye" },
+  { value: "us", label: "Amerika Birleşik Devletleri" },
+  { value: "de", label: "Almanya" },
+  { value: "fr", label: "Fransa" },
+  { value: "gb", label: "İngiltere" },
+]
+
+export const cities = {
+  tr: [
+    { value: "istanbul", label: "İstanbul" },
+    { value: "ankara", label: "Ankara" },
+    { value: "izmir", label: "İzmir" },
+    { value: "bursa", label: "Bursa" },
+    { value: "antalya", label: "Antalya" },
+  ],
+  us: [
+    { value: "new-york", label: "New York" },
+    { value: "los-angeles", label: "Los Angeles" },
+    { value: "chicago", label: "Chicago" },
+  ],
+  de: [
+    { value: "berlin", label: "Berlin" },
+    { value: "munich", label: "Munich" },
+    { value: "hamburg", label: "Hamburg" },
+  ],
+  fr: [
+    { value: "paris", label: "Paris" },
+    { value: "marseille", label: "Marseille" },
+    { value: "lyon", label: "Lyon" },
+  ],
+  gb: [
+    { value: "london", label: "London" },
+    { value: "manchester", label: "Manchester" },
+    { value: "birmingham", label: "Birmingham" },
+  ],
+}
+
+export const hobbies = [
+  { value: "reading", label: "Okuma" },
+  { value: "sports", label: "Spor" },
+  { value: "music", label: "Müzik" },
+  { value: "travel", label: "Seyahat" },
+  { value: "cooking", label: "Yemek Yapma" },
+  { value: "gaming", label: "Oyun" },
+  { value: "photography", label: "Fotoğrafçılık" },
+  { value: "art", label: "Sanat" },
+]
+
+export const socialPlatforms = [
+  { value: "instagram", label: "Instagram" },
+  { value: "twitter", label: "Twitter" },
+  { value: "linkedin", label: "LinkedIn" },
+  { value: "facebook", label: "Facebook" },
+  { value: "youtube", label: "YouTube" },
+  { value: "tiktok", label: "TikTok" },
+] 
+
+export const passwordRules = [
+  {
+    id: "minLength",
+    label: "En az 8 karakter",
+    regex: /.{8,}/,
+    test: (password: string) => password.length >= 8
+  },
+  {
+    id: "uppercase",
+    label: "En az 1 büyük harf",
+    regex: /[A-Z]/,
+    test: (password: string) => /[A-Z]/.test(password)
+  },
+  {
+    id: "lowercase",
+    label: "En az 1 küçük harf",
+    regex: /[a-z]/,
+    test: (password: string) => /[a-z]/.test(password)
+  },
+  {
+    id: "number",
+    label: "En az 1 rakam",
+    regex: /\d/,
+    test: (password: string) => /\d/.test(password)
+  },
+  {
+    id: "special",
+    label: "En az 1 özel karakter",
+    regex: /[@$!%*?&]/,
+    test: (password: string) => /[@$!%*?&]/.test(password)
+  }
+];

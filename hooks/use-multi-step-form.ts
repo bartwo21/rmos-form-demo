@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { cities } from "@/lib/form-schema"
-import { stepHeaders } from "@/lib/constants"
+import { getPasswordChecks, FormData } from "@/lib/form-schema"
+import { cities, stepHeaders } from "@/lib/constants"
+import { UseFormReturn } from "react-hook-form"
 
 export interface Step {
   id: string
@@ -20,6 +21,7 @@ export interface StepHeader {
 export function useMultiStepForm(steps: Step[]) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0)
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set())
+  const [maxReachedStep, setMaxReachedStep] = useState(0)
   
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -30,31 +32,48 @@ export function useMultiStepForm(steps: Step[]) {
   const isFirstStep = currentStepIndex === 0
   const isLastStep = currentStepIndex === steps.length - 1
 
-  function goToNext() {
+  const goToNext = () => {
     if (!isLastStep) {
       setCompletedSteps(prev => new Set(prev).add(currentStepIndex))
-      setCurrentStepIndex(currentStepIndex + 1)
+      const nextStep = currentStepIndex + 1
+      setCurrentStepIndex(nextStep)
+      setMaxReachedStep(prev => Math.max(prev, nextStep))
     }
   }
 
-  function goToPrevious() {
+  const goToPrevious = () => {
     if (!isFirstStep) {
       setCurrentStepIndex(currentStepIndex - 1)
     }
   }
 
-  function goToStep(stepIndex: number) {
-    if (stepIndex >= 0 && stepIndex < steps.length) {
+  const goToStep = (stepIndex: number) => {
+    if (stepIndex >= 0 && stepIndex < steps.length && stepIndex <= maxReachedStep) {
       setCurrentStepIndex(stepIndex)
     }
   }
 
-  function markStepAsCompleted(stepIndex: number) {
+  const markStepAsCompleted = (stepIndex: number) => {
     setCompletedSteps(prev => new Set(prev).add(stepIndex))
   }
 
-  function isStepCompleted(stepIndex: number) {
+  const isStepCompleted = (stepIndex: number) => {
     return completedSteps.has(stepIndex)
+  }
+
+  const isLastVisitedStep = (stepIndex: number) => {
+    return stepIndex === maxReachedStep && stepIndex > currentStepIndex && !completedSteps.has(stepIndex)
+  }
+
+  const resetForm = (form: UseFormReturn<FormData>) => {
+    form.reset()
+    setCurrentStepIndex(0)
+    setCompletedSteps(new Set())
+    setMaxReachedStep(0)
+    setUploadedFile(null)
+    setShowPassword(false)
+    setShowConfirmPassword(false)
+    setUploadedFile(null)
   }
 
   const getStepFields = (stepIndex: number) => {
@@ -74,14 +93,6 @@ export function useMultiStepForm(steps: Step[]) {
     return headers[stepIndex] || headers[0]
   }
 
-  const getPasswordChecks = (password: string) => [
-    { label: "En az 8 karakter", valid: password.length >= 8 },
-    { label: "En az 1 büyük harf", valid: /[A-Z]/.test(password) },
-    { label: "En az 1 küçük harf", valid: /[a-z]/.test(password) },
-    { label: "En az 1 rakam", valid: /\d/.test(password) },
-    { label: "En az 1 özel karakter", valid: /[@$!%*?&]/.test(password) },
-  ]
-
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, setValue: any) => {
     const file = event.target.files?.[0]
     if (file) {
@@ -95,6 +106,21 @@ export function useMultiStepForm(steps: Step[]) {
     return selectedCountry && cities[selectedCountry as keyof typeof cities] 
       ? cities[selectedCountry as keyof typeof cities] 
       : []
+  }
+  
+  const validatePasswords = async (form: UseFormReturn<FormData>) => {
+    const password = form.getValues("password")
+    const confirmPassword = form.getValues("confirmPassword")
+    
+    if (password !== confirmPassword) {
+      form.setError("confirmPassword", { 
+        type: "manual",
+        message: "Şifreler eşleşmiyor",
+      })
+      return false
+    }
+    
+    return true
   }
 
   const progress = ((currentStepIndex + 1) / steps.length) * 100
@@ -110,10 +136,12 @@ export function useMultiStepForm(steps: Step[]) {
     goToStep,
     markStepAsCompleted,
     isStepCompleted,
+    isLastVisitedStep,
     getStepFields,
     getStepHeader,
     progress,
     completedSteps,
+    maxReachedStep,
     showPassword,
     setShowPassword,
     showConfirmPassword,
@@ -123,5 +151,7 @@ export function useMultiStepForm(steps: Step[]) {
     setUploadedFile,
     handleFileUpload,
     getAvailableCities,
+    validatePasswords,
+    resetForm
   }
 }

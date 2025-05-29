@@ -1,7 +1,7 @@
 "use client"
 
 import { UseFormReturn, useFieldArray } from "react-hook-form"
-import { FormData, socialPlatforms } from "@/lib/form-schema"
+import { FormData } from "@/lib/form-schema"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card"
 import { FileText, Upload, Plus, Trash2, Camera } from "lucide-react"
 import { useMultiStepForm } from "@/hooks/use-multi-step-form"
-import { steps } from "@/lib/constants"
+import { steps, socialPlatforms } from "@/lib/constants"
 
 interface FilesInfoStepProps {
   form: UseFormReturn<FormData>
@@ -89,7 +89,7 @@ export function FilesInfoStep({ form }: FilesInfoStepProps) {
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-base font-medium text-gray-700 dark:text-gray-300">
-              Biyografi *
+              Biyografi
             </FormLabel>
             <FormControl>
               <Textarea 

@@ -1,11 +1,12 @@
 "use client"
 
 import { UseFormReturn } from "react-hook-form"
-import { FormData, hobbies } from "@/lib/form-schema"
+import { FormData } from "@/lib/form-schema"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Heart, User2, Users2 } from "lucide-react"
+import { hobbies } from "@/lib/constants"
 
 interface PreferencesStepProps {
   form: UseFormReturn<FormData>
@@ -24,11 +25,13 @@ export function PreferencesStep({ form }: PreferencesStepProps) {
         </div>
       </div>
 
+      
+      <div className="flex items-start gap-3">
       <FormField
         control={form.control}
         name="gender"
         render={({ field }) => (
-          <FormItem className="space-y-3">
+          <FormItem className="w-1/2">
             <FormLabel className="text-base font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
               <User2 className="h-4 w-4" />
               Cinsiyet *
@@ -37,7 +40,7 @@ export function PreferencesStep({ form }: PreferencesStepProps) {
               <RadioGroup
                 onValueChange={field.onChange}
                 defaultValue={field.value}
-                className="flex flex-col space-y-2"
+                className="flex flex-col"
               >
                 <div className="flex items-center space-x-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                   <RadioGroupItem value="male" id="male" />
@@ -77,13 +80,12 @@ export function PreferencesStep({ form }: PreferencesStepProps) {
         control={form.control}
         name="hobbies"
         render={() => (
-          <FormItem>
-            <div className="mb-4">
+          <FormItem className="w-1/2">
+            <div>
               <FormLabel className="text-base font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
                 <Users2 className="h-4 w-4" />
-                Hobiler *
+                Hobiler
               </FormLabel>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">En az bir hobi seçiniz</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {hobbies.map((hobby) => (
@@ -127,7 +129,7 @@ export function PreferencesStep({ form }: PreferencesStepProps) {
           </FormItem>
         )}
       />
-
+      </div>
     </div>
   )
 } 

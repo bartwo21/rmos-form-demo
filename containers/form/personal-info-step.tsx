@@ -35,12 +35,12 @@ export function PersonalInfoStep({ form }: PersonalInfoStepProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="flex items-start gap-3">
         <FormField
           control={form.control}
           name="firstName"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-1/3">
               <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Ad *
               </FormLabel>
@@ -60,7 +60,7 @@ export function PersonalInfoStep({ form }: PersonalInfoStepProps) {
           control={form.control}
           name="lastName"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-1/3">
               <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Soyad *
               </FormLabel>
@@ -75,13 +75,11 @@ export function PersonalInfoStep({ form }: PersonalInfoStepProps) {
             </FormItem>
           )}
         />
-      </div>
-
-      <FormField
+        <FormField
         control={form.control}
         name="email"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className="w-1/3">
             <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Email *
             </FormLabel>
@@ -97,12 +95,13 @@ export function PersonalInfoStep({ form }: PersonalInfoStepProps) {
           </FormItem>
         )}
       />
-
+      </div>
+      <div className="flex items-start gap-3">
       <FormField
         control={form.control}
         name="phone"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className="w-1/2">
             <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Telefon *
             </FormLabel>
@@ -122,7 +121,7 @@ export function PersonalInfoStep({ form }: PersonalInfoStepProps) {
         control={form.control}
         name="birthDate"
         render={({ field }) => (
-          <FormItem className="flex flex-col">
+          <FormItem className="w-1/2">
             <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Doğum Tarihi *
             </FormLabel>
@@ -162,6 +161,7 @@ export function PersonalInfoStep({ form }: PersonalInfoStepProps) {
           </FormItem>
         )}
       />
+      </div>
     </div>
   )
 } 
