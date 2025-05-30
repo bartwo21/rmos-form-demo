@@ -40,7 +40,7 @@ export function PersonalInfoStep({ form }: PersonalInfoStepProps) {
           control={form.control}
           name="firstName"
           render={({ field }) => (
-            <FormItem className="w-1/3">
+            <FormItem className="w-1/2">
               <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Ad *
               </FormLabel>
@@ -60,7 +60,7 @@ export function PersonalInfoStep({ form }: PersonalInfoStepProps) {
           control={form.control}
           name="lastName"
           render={({ field }) => (
-            <FormItem className="w-1/3">
+            <FormItem className="w-1/2">
               <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Soyad *
               </FormLabel>
@@ -75,11 +75,12 @@ export function PersonalInfoStep({ form }: PersonalInfoStepProps) {
             </FormItem>
           )}
         />
+      </div>
         <FormField
         control={form.control}
         name="email"
         render={({ field }) => (
-          <FormItem className="w-1/3">
+          <FormItem>
             <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Email *
             </FormLabel>
@@ -95,7 +96,6 @@ export function PersonalInfoStep({ form }: PersonalInfoStepProps) {
           </FormItem>
         )}
       />
-      </div>
       <div className="flex items-start gap-3">
       <FormField
         control={form.control}
